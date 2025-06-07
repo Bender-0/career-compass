@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('notes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('application_id')->references('id')->on('applications')->cascadeOnDelete();
-            $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->enum('category', ['personal', 'professional', 'other'])->default('personal');
             $table->text('content');
             $table->timestamps();
