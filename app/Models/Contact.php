@@ -5,28 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Contact extends Model
 {
     use HasFactory;
     /**
-     * @return BelongsTo<User,Contact>
+     * @return BelongsTo<Application,Contact>
      */
-    public function user(): BelongsTo
+    public function application(): BelongsTo
     {
-        return $this->belongsTo(User::class);
-    }
-    /**
-     * @return HasMany<Interaction,Contact>
-     */
-    public function interactions(): HasMany
-    {
-        return $this->hasMany(Interaction::class);
+        return $this->belongsTo(Application::class);
     }
 
     protected $fillable = [
-        'user_id',
+        'application_id',
         'name',
         'email',
         'phone',

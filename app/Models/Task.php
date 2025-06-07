@@ -11,14 +11,6 @@ class Task extends Model
     use HasFactory;
 
     /**
-     * @return BelongsTo<User,Task>
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-    
-    /**
      * @return BelongsTo<Application,Task>
      */
     public function application(): BelongsTo
@@ -27,7 +19,6 @@ class Task extends Model
     }
 
     protected $fillable = [
-        'user_id',
         'application_id',
         'title',
         'description',

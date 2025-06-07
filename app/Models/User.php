@@ -19,44 +19,6 @@ class User extends Authenticatable
     {
         return $this->hasMany(Application::class);
     }
-    /**
-     * @return HasMany<Note,User>
-     */
-    public function notes(): HasMany
-    {
-        return $this->hasMany(Note::class);
-    }
-    /**
-     * @return HasMany<Contact,User>
-     */
-    public function contacts(): HasMany
-    {
-        return $this->hasMany(Contact::class);
-    }
-
-    /**
-     * @return HasMany<Interaction,User>
-     */
-    public function interactions(): HasMany
-    {
-        return $this->hasMany(Interaction::class);
-    }
-
-    /**
-     * @return HasMany<Document,User>
-     */
-    public function documents(): HasMany
-    {
-        return $this->hasMany(Document::class);
-    }
-
-    /**
-     * @return HasMany<Task,User>
-     */
-    public function tasks(): HasMany
-    {
-        return $this->hasMany(Task::class);
-    }
 
     /**
      * The attributes that are mass assignable.

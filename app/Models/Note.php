@@ -10,13 +10,6 @@ class Note extends Model
 {
     use HasFactory;
     /**
-     * @return BelongsTo<User,Note>
-     */
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
-    /**
      * @return BelongsTo<Application,Note>
      */
     public function application(): BelongsTo
@@ -25,7 +18,6 @@ class Note extends Model
     }
 
     protected $fillable = [
-        'user_id',
         'application_id',
         'category',
         'content',

@@ -25,25 +25,19 @@ class Application extends Model
         return $this->hasMany(Note::class);
     }
     /**
-     * @return HasMany<Document,Application>
-     */
-    public function documents(): HasMany
-    {
-        return $this->hasMany(Document::class);
-    }
-    /**
      * @return HasMany<Task,Application>
      */
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
     }
+    
     /**
-     * @return HasMany<Interaction,Application>
+     * @return HasMany<Contact,Application>
      */
-    public function interactions(): HasMany
+    public function contacts(): HasMany
     {
-        return $this->hasMany(Interaction::class, 'related_application_id');
+        return $this->hasMany(Contact::class);
     }
 
     protected $fillable = [
