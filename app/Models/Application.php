@@ -44,6 +44,7 @@ class Application extends Model
         'user_id',
         'job_title',
         'company_name',
+        'company_website',
         'applied_date',
         'status',
         'job_description',
@@ -52,5 +53,9 @@ class Application extends Model
         'application_link',
         'posted_date',
         'application_deadline',
+        'resume',
+        'cover_letter',
+        'resume_original_name',
+        'cover_letter_original_name',
     ];
 }
