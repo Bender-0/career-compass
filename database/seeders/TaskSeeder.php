@@ -9,7 +9,7 @@ class TaskSeeder extends Seeder
 {
     public function run(): void
     {
-        $count = rand(1, 6);
+        $count = rand(10, 30);
         Task::factory()->count($count)->create();
     }
 }

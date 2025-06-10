@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->string('job_title');
             $table->string('company_name');
+            $table->string('company_website');
             $table->date('applied_date');
             $table->enum('status', ['pending', 'interview', 'offer', 'rejected'])->default('pending');
             $table->text('job_description')->nullable();
@@ -24,6 +25,9 @@ return new class extends Migration
             $table->string('application_link')->nullable();
             $table->date('posted_date')->nullable();
             $table->date('application_deadline')->nullable();
+
+            // add tags with onsite, remote, hybrid
+            $table->enum('type', ['onsite', 'remote', 'hybrid', 'freelance'])->default('onsite');
 
             $table->timestamps();
         });

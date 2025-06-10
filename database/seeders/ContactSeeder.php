@@ -9,7 +9,7 @@ class ContactSeeder extends Seeder
 {
     public function run(): void
     {
-        $count = rand(1, 6);
+        $count = rand(10, 30);
         Contact::factory()->count($count)->create();
     }
 }

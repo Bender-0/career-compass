@@ -24,6 +24,7 @@ class ApplicationFactory extends Factory
             'user_id' => User::all()->first()->id,
             'job_title' => $this->faker->jobTitle(),
             'company_name' => $this->faker->company(),
+            'company_website' => $this->faker->url(),
             'applied_date' => $appliedDate,
             'status' => $this->faker->randomElement($statuses),
             'job_description' => $this->faker->paragraphs(3, true),
