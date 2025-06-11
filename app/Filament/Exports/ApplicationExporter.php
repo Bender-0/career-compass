@@ -14,9 +14,8 @@ class ApplicationExporter extends Exporter
     public static function getColumns(): array
     {
         return [
-            ExportColumn::make('id')
-                ->label('ID'),
-            // ExportColumn::make('user.name'),
+            ExportColumn::make('id'),
+            ExportColumn::make('user_id'),
             ExportColumn::make('job_title'),
             ExportColumn::make('company_name'),
             ExportColumn::make('company_website'),
@@ -28,8 +27,8 @@ class ApplicationExporter extends Exporter
             ExportColumn::make('application_link'),
             ExportColumn::make('posted_date'),
             ExportColumn::make('application_deadline'),
-            // ExportColumn::make('created_at'),
-            // ExportColumn::make('updated_at'),
+            ExportColumn::make('created_at'),
+            ExportColumn::make('updated_at'),
         ];
     }
 
