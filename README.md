@@ -1,61 +1,229 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# CareerCompass: Laravel Job Application Tracker
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+🚀 **Transform Your Job Search Journey** - A powerful, elegant application for managing job applications, interviews, and your entire career search process. Built with Laravel 12 and Filament 3.
 
-## About Laravel
+![CareerCompass](https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg)
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 📋 Overview
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+CareerCompass is a sophisticated web application designed to empower job seekers with powerful organization tools for their career search. In today's competitive job market, staying organized is key to success - and CareerCompass delivers the perfect solution with its intuitive interface and comprehensive tracking capabilities.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Never miss an opportunity, deadline, or follow-up again. CareerCompass provides a centralized command center to manage every aspect of your job search journey - from tracking applications and monitoring statuses to storing important documents and managing professional contacts.
 
-## Learning Laravel
+## ✨ Features
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- **Comprehensive Job Application Dashboard**
+  - Track job titles, company information, and application status at a glance
+  - Store detailed job descriptions, salary expectations, and location information
+  - Monitor application deadlines and posting dates with visual indicators
+  - Categorize positions by work arrangement (remote, onsite, hybrid, or freelance)
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **Visual Application Pipeline**
+  - Intuitive status indicators with color coding (Pending, Interview, Offer, Rejected)
+  - Track your application journey from submission to decision
+  - Filter and sort applications by status, date, or company
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **Smart Document Management**
+  - Upload and manage tailored resumes and cover letters (PDF and Word formats, up to 10MB each)
+  - Intelligent file organization with automatic, standardized naming conventions (e.g., `COMPANY-NAME_USER-NAME_Resume.pdf`)
+  - One-click access to your documents directly within the application
+  - Secure storage with proper file organization by company and document type
 
-## Laravel Sponsors
+- **Professional Network Management**
+  - Build a database of company contacts and recruiters
+  - Track names, email addresses, phone numbers, and LinkedIn profiles
+  - Associate contacts with specific job applications
+  - Quick access to your professional connections for efficient follow-ups
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- **Intelligent Note Taking**
+  - Capture important details about each opportunity
+  - Categorize notes (Personal, Professional, Other) for better organization
+  - Rich text editor with formatting capabilities for professional-looking notes
+  - Track interview questions, company research, and personal reflections
 
-### Premium Partners
+- **Action-Oriented Task Management**
+  - Create and prioritize to-do items for each application
+  - Track completion status with visual indicators
+  - Never miss important follow-ups or preparation tasks
+  - Stay on top of your job search activities
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- **Beautiful, Intuitive Interface**
+  - Modern, responsive design that works on all devices
+  - Tabbed navigation within each application for efficient management
+  - Dynamic badges display counts for associated items (notes, contacts, tasks)
+  - Clean, distraction-free layout focused on productivity
 
-## Contributing
+- **Seamless Data Portability**
+  - Export your job application data to CSV for external analysis or backup
+  - Import existing job applications from spreadsheets or other tracking systems
+  - Never lose your valuable job search history
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- **Secure Multi-User Support**
+  - Private, secure user accounts with data isolation
+  - Personal job application tracking for individuals
+  - Data protection with modern security practices
 
-## Code of Conduct
+## 🚀 Tech Stack
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+- **Modern Framework**: Built on Laravel 12, the latest version of PHP's most elegant framework
+- **Beautiful Admin Panel**: Powered by Filament 3 for a responsive, feature-rich interface
+- **Robust Database**: Compatible with MySQL and PostgreSQL for reliable data storage
+- **Reactive Frontend**: Leveraging Livewire and Tailwind CSS for a smooth, modern UI experience
+- **Developer-Friendly**: Includes Laravel Debugbar, Laravel IDE Helper, and Laravel Telescope for easy maintenance and extension
 
-## Security Vulnerabilities
+## 📦 Installation
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Prerequisites
 
-## License
+- PHP 8.2 or higher
+- Composer
+- MySQL or PostgreSQL
+- Node.js and NPM
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Setup Instructions
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/Bender-0/laravel-job-tracker.git
+   cd laravel-job-tracker
+   ```
+
+2. **Install PHP dependencies**
+   ```bash
+   composer install
+   ```
+
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+
+4. **Configure your database in the .env file**
+   ```
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=job_tracker
+   DB_USERNAME=root
+   DB_PASSWORD=
+   ```
+
+5. **Run migrations, seed the database and link storage**
+   ```bash
+   php artisan migrate
+   php artisan db:seed
+   php artisan storage:link
+   ```
+
+6. **Install frontend dependencies**
+   ```bash
+   npm install
+   ```
+
+7. **Start the development server**
+   ```bash
+   composer run dev
+   ```
+   OR
+   ```bash
+   npm run dev
+   ```
+   ```bash
+   php artisan serve
+   ```
+
+8. **Access the application**
+   Visit `http://localhost:8000/` in your browser
+   ```
+    user: user@example.com
+    password: password
+   ```
+
+## 🧭 Getting Started with CareerCompass
+
+### Creating a New Job Application
+
+1. Log in to your account
+2. Click on "Create Application" button
+3. Fill in the job details:
+   - Job title
+   - Company name
+   - Company website
+   - Application date
+   - Job status
+   - Job description
+   - Salary range
+   - Location
+   - Application link
+   - Posted date and deadline (if applicable)
+4. Upload your custom resume and cover letter (optional)
+5. Click "Create" to save the application
+
+### Managing Applications
+
+- View all applications in the dashboard grid
+- Filter applications by status
+- Search for specific applications by job title or company
+- Click on an application to view or edit details
+
+### Adding Contacts, Notes, and Tasks
+
+1. Open an application
+2. Navigate to the respective tab (Contacts, Notes, Tasks)
+3. Add new entries as needed
+4. All entries are automatically associated with the current application
+
+### Document Management
+
+- Upload resumes and cover letters (supports PDF and Word documents, max 10MB per file).
+- Documents are automatically renamed using a consistent pattern (e.g., `COMPANY-NAME_USER-NAME_Resume.pdf`) and organized into structured directories (e.g., `storage/applications/company_name/resume/`).
+- Access, download, or open uploaded documents directly from the application details page.
+
+## 🔄 Data Import/Export
+
+### Exporting Data
+
+1. Go to the Applications list
+2. Click the Export button
+3. Select CSV format
+4. Download the exported file
+
+### Importing Data
+
+1. Go to the Applications list
+2. Click the Import button
+3. Upload your CSV file with application data
+4. Map the columns and confirm import
+
+## 🛠️ Customization
+
+The application can be extended with additional features:
+
+- Custom status workflows
+- Email notifications for application updates
+- Interview scheduling
+- Salary negotiation tracking
+
+## 🛠️ Customization & Extension
+
+CareerCompass is designed to be highly customizable and extensible. Some popular customizations include:
+
+- **Custom Application Stages**: Tailor the workflow to match your specific job search process
+- **Email Notifications**: Set up alerts for application deadlines, interview reminders, and follow-ups
+- **Interview Scheduling**: Integrate with calendar systems for seamless interview management
+- **Salary Negotiation Tracking**: Add specialized tools for tracking offers and negotiations
+- **Analytics Dashboard**: Gain insights into your job search patterns and success rates
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+---
+
+<p align="center">Built with ❤️ using Laravel and Filament</p>
+<p align="center">Take control of your career journey with CareerCompass</p>
