@@ -5,8 +5,8 @@ namespace App\Filament\Resources\ApplicationResource\Pages;
 use Filament\Actions;
 use Filament\Tables\Table;
 use App\Models\Application;
+use Illuminate\Support\Str;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Tables\Columns\Layout\Grid;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Tables\Actions\ExportAction;
 use Filament\Tables\Actions\ImportAction;
@@ -21,16 +21,12 @@ use Filament\Actions\Exports\Enums\ExportFormat;
 class ListApplications extends ListRecords
 {
     protected static string $resource = ApplicationResource::class;
-
-    // Cache status options to avoid duplication
     private const STATUS_OPTIONS = [
         'pending' => 'Pending',
         'interview' => 'Interview',
         'offer' => 'Offer',
         'rejected' => 'Rejected',
     ];
-
-    // Cache status colors
     private const STATUS_COLORS = [
         'pending' => 'gray',
         'interview' => 'info',
@@ -42,22 +38,22 @@ class ListApplications extends ListRecords
     {
         return $table
             ->columns([
-                $this->buildMainStack(),
+                $this->createMainInfoStack(),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
-                $this->buildStatusFilter(),
+                $this->createStatusFilter(),
             ])
             ->contentGrid([
                 'sm' => 1,
                 'md' => 2,
                 'xl' => 3,
             ])
-            ->paginated([9, 18, 27, 'all'])
+            ->paginated([9, 18, 27, 'all']) //TODO: remove ('all') on production
             ->searchDebounce('1000ms')
             ->headerActions([
-                $this->buildExportAction(),
-                $this->buildImportAction(),
+                $this->createExportAction(),
+                $this->createImportAction(),
             ]);
     }
 
@@ -68,32 +64,35 @@ class ListApplications extends ListRecords
         ];
     }
 
-    private function buildMainStack(): Stack
+    private function createMainInfoStack(): Stack
     {
         return Stack::make([
-            $this->buildJobTitleColumn(),
-            $this->buildCompanyNameColumn(),
-            $this->buildStatusColumn(),
-            $this->buildAppliedDateColumn(),
-            $this->buildLocationSalaryRow(),
-            $this->buildDocumentsGrid(),
-            $this->buildCountsRow(),
+            $this->createJobTitleColumn(),
+            $this->createCompanyNameColumn(),
+            $this->createStatusColumn(),
+            $this->createJobDetailsGrid(),
+            $this->createMetricsRow(),
         ]);
     }
 
-    private function buildJobTitleColumn(): TextColumn
+    private function createJobTitleColumn(): TextColumn
     {
         return TextColumn::make('job_title')
-            ->tooltip(fn (Application $record): string => 'Job Title: ' . $record->job_title)
+            ->tooltip(function (Application $record): string {
+                if (Str::length($record->job_title) > 30) {
+                    return "Job Title: {$record->job_title}";
+                }
+
+                return 'Job Title';
+            })
             ->searchable()
             ->weight('bold')
             ->size('lg')
-            // ->description(fn (Application $record): string => $record->job_title)
             ->limit(30)
             ->extraAttributes(['class' => 'items-center justify-center']);
     }
 
-    private function buildCompanyNameColumn(): TextColumn
+    private function createCompanyNameColumn(): TextColumn
     {
         return TextColumn::make('company_name')
             ->tooltip('Company Name')
@@ -102,7 +101,7 @@ class ListApplications extends ListRecords
             ->extraAttributes(['class' => 'items-center justify-center']);
     }
 
-    private function buildStatusColumn(): TextColumn
+    private function createStatusColumn(): TextColumn
     {
         return TextColumn::make('status')
             ->tooltip('Status')
@@ -112,43 +111,49 @@ class ListApplications extends ListRecords
             ->columnSpanFull();
     }
 
-    private function buildAppliedDateColumn(): TextColumn
+    private function createDateLocationResumeRow(): Stack
     {
-        return TextColumn::make('applied_date')
-            ->tooltip('Applied Date')
-            ->date('d.M.Y')
-            ->sortable()
-            ->icon('heroicon-o-calendar');
-    }
-
-    private function buildLocationSalaryRow(): Split
-    {
-        return Split::make([
+        return Stack::make([
+            TextColumn::make('applied_date')
+                ->tooltip('Applied Date')
+                ->date('d.M.Y')
+                ->sortable()
+                ->icon('heroicon-o-calendar'),
             TextColumn::make('location')
                 ->tooltip('Location')
                 ->icon('heroicon-o-map-pin')
                 ->searchable(),
-            TextColumn::make('salary_range')
-                ->tooltip('Salary Range')
-                ->icon('heroicon-o-currency-dollar'),
+            $this->createDocumentColumn('resume', 'Resume'),
         ]);
     }
 
-    private function buildDocumentsGrid(): Grid
+    private function createSalaryTypeDocumentRow(): Stack
     {
-        return Grid::make()
-            ->schema([
-                $this->buildDocumentColumn('resume', 'Resume'),
-                $this->buildDocumentColumn('cover_letter', 'Cover Letter'),
-            ])
-            ->extraAttributes(['class' => 'items-center justify-center']);
+        return Stack::make([
+            TextColumn::make('salary_range')
+                ->tooltip('Salary Range')
+                ->icon('heroicon-o-currency-dollar'),
+            TextColumn::make('job_type')
+                ->tooltip('Job Type')
+                ->icon('heroicon-o-briefcase')
+                ->searchable(),
+            $this->createDocumentColumn('cover_letter', 'Cover Letter'),
+        ]);
     }
 
-    private function buildDocumentColumn(string $documentType, string $label): TextColumn
+    private function createJobDetailsGrid(): Split
+    {
+        return Split::make([
+                $this->createDateLocationResumeRow(),
+                $this->createSalaryTypeDocumentRow(),
+            ]);
+    }
+
+    private function createDocumentColumn(string $documentType, string $label): TextColumn
     {
         return TextColumn::make("has_{$documentType}")
             ->icon('heroicon-o-document-text')
-            ->badge()
+            // ->badge()
             ->tooltip($label)
             ->state(function (Application $record) use ($documentType, $label): string {
                 $hasDocument = $record->document?->{$documentType} !== null;
@@ -159,18 +164,18 @@ class ListApplications extends ListRecords
             });
     }
 
-    private function buildCountsRow(): Split
+    private function createMetricsRow(): Split
     {
         return Split::make([
-            $this->buildCountColumn('notes_count', 'heroicon-o-document-text', 'Notes', 'notes', 'justify-start'),
-            $this->buildCountColumn('contacts_count', 'heroicon-o-user', 'Contacts', 'contacts', 'items-center justify-center'),
-            $this->buildCountColumn('tasks_count', 'heroicon-o-check-circle', 'Tasks', 'tasks', 'justify-end'),
+            $this->createMetricColumn('notes_count', 'heroicon-o-document-text', 'Notes', 'notes', 'justify-start'),
+            $this->createMetricColumn('contacts_count', 'heroicon-o-user', 'Contacts', 'contacts', 'items-center justify-center'),
+            $this->createMetricColumn('tasks_count', 'heroicon-o-check-circle', 'Tasks', 'tasks', 'justify-end'),
         ])
         ->extraAttributes(['class' => 'mt-3'])
         ->columnSpanFull();
     }
 
-    private function buildCountColumn(string $name, string $icon, string $tooltip, string $relationship, string $alignment): TextColumn
+    private function createMetricColumn(string $name, string $icon, string $tooltip, string $relationship, string $alignment): TextColumn
     {
         return TextColumn::make($name)
             ->icon($icon)
@@ -180,13 +185,13 @@ class ListApplications extends ListRecords
             ->extraAttributes(['class' => $alignment]);
     }
 
-    private function buildStatusFilter(): SelectFilter
+    private function createStatusFilter(): SelectFilter
     {
         return SelectFilter::make('status')
             ->options(self::STATUS_OPTIONS);
     }
 
-    private function buildExportAction(): ExportAction
+    private function createExportAction(): ExportAction
     {
         return ExportAction::make()
             ->exporter(ApplicationExporter::class)
@@ -194,7 +199,7 @@ class ListApplications extends ListRecords
             ->fileName(fn (): string => 'job_application_' . now()->format('d_m_y'));
     }
 
-    private function buildImportAction(): ImportAction
+    private function createImportAction(): ImportAction
     {
         return ImportAction::make()
             ->importer(ApplicationImporter::class);
