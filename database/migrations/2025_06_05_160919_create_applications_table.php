@@ -19,15 +19,13 @@ return new class extends Migration
             $table->string('company_website');
             $table->date('applied_date');
             $table->enum('status', ['pending', 'interview', 'offer', 'rejected'])->default('pending');
-            $table->text('job_description')->nullable();
+            $table->longText('job_description')->nullable();
+            $table->enum('job_type', ['onsite', 'remote', 'hybrid', 'freelance'])->default('onsite');
             $table->string('salary_range')->nullable();
             $table->string('location')->nullable();
             $table->string('application_link')->nullable();
             $table->date('posted_date')->nullable();
             $table->date('application_deadline')->nullable();
-
-            // add tags with onsite, remote, hybrid
-            $table->enum('type', ['onsite', 'remote', 'hybrid', 'freelance'])->default('onsite');
 
             $table->timestamps();
         });
