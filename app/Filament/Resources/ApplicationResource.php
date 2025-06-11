@@ -28,7 +28,13 @@ class ApplicationResource extends Resource
     protected static ?string $model = Application::class;
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    // Constants for better maintainability
+    private const TYPE_OPTIONS = [
+        'onsite' => 'Onsite',
+        'remote' => 'Remote',
+        'hybrid' => 'Hybrid',
+        'freelance' => 'Freelance',
+    ];
+
     private const STATUS_OPTIONS = [
         'pending' => 'Pending',
         'interview' => 'Interview',
@@ -43,7 +49,7 @@ class ApplicationResource extends Resource
     ];
 
     private const ACCEPTED_FILE_TYPES = ['application/pdf', 'application/msword'];
-    private const MAX_FILE_SIZE = 10240; // 10MB
+    private const MAX_FILE_SIZE = 10240;
 
     public static function form(Form $form): Form
     {
@@ -65,11 +71,10 @@ class ApplicationResource extends Resource
             ->icon('heroicon-o-rectangle-stack')
             ->schema([
                 self::buildBasicInfoGroup(),
-                self::buildStatusDateGroup(),
+                self::buildApplicationStatusGroup(),
                 self::buildJobDescriptionField(),
-                self::buildLocationSalaryGroup(),
-                self::buildApplicationLinkField(),
-                self::buildDatesGroup(),
+                self::buildLocationTypeGroup(),
+                self::buildJobDateGroup(),
                 self::buildDocumentsGroup(),
             ]);
     }
@@ -91,12 +96,17 @@ class ApplicationResource extends Resource
                 ->required()
                 ->url()
                 ->maxLength(255),
+            Forms\Components\TextInput::make('application_link')
+                ->prefixIcon('heroicon-o-link')
+                ->required()
+                ->url()
+                ->maxLength(500),
         ])
         ->columns(['sm' => 1, 'md' => 2])
         ->columnSpanFull();
     }
 
-    private static function buildStatusDateGroup(): Group
+    private static function buildApplicationStatusGroup(): Group
     {
         return Group::make([
             Forms\Components\DatePicker::make('applied_date')
@@ -109,6 +119,10 @@ class ApplicationResource extends Resource
                 ->options(self::STATUS_OPTIONS)
                 ->default('pending')
                 ->required(),
+            Forms\Components\TextInput::make('salary_range')
+                ->prefixIcon('heroicon-o-currency-dollar')
+                ->required()
+                ->maxLength(100),
         ])
         ->columns(['sm' => 1, 'md' => 2])
         ->columnSpanFull();
@@ -121,33 +135,23 @@ class ApplicationResource extends Resource
             ->required();
     }
 
-    private static function buildLocationSalaryGroup(): Group
+    private static function buildLocationTypeGroup(): Group
     {
         return Group::make([
-            Forms\Components\TextInput::make('salary_range')
-                ->prefixIcon('heroicon-o-currency-dollar')
-                ->required()
-                ->maxLength(100),
             Forms\Components\TextInput::make('location')
                 ->prefixIcon('heroicon-o-map-pin')
                 ->required()
                 ->maxLength(255),
-        ])
+            Forms\Components\Select::make('job_type')
+                ->options(self::TYPE_OPTIONS)
+                ->default('remote')
+                ->required(),
+            ])
         ->columns(['sm' => 1, 'md' => 2])
         ->columnSpanFull();
     }
 
-    private static function buildApplicationLinkField(): Forms\Components\TextInput
-    {
-        return Forms\Components\TextInput::make('application_link')
-            ->prefixIcon('heroicon-o-link')
-            ->columnSpanFull()
-            ->required()
-            ->url()
-            ->maxLength(500);
-    }
-
-    private static function buildDatesGroup(): Group
+    private static function buildJobDateGroup(): Group
     {
         return Group::make([
             Forms\Components\DatePicker::make('posted_date')
@@ -182,7 +186,7 @@ class ApplicationResource extends Resource
         return FileUpload::make($type)
             ->label($label)
             ->disk('public')
-            ->directory(fn ($get) => self::getUploadDirectory($get('company_name'), $type))
+            ->directory(fn ($get) => self::generateUploadDirectory($get('company_name'), $type))
             ->acceptedFileTypes(self::ACCEPTED_FILE_TYPES)
             ->visibility('public')
             ->maxSize(self::MAX_FILE_SIZE)
@@ -196,7 +200,7 @@ class ApplicationResource extends Resource
             ->deleteUploadedFileUsing(fn (string $file) => Storage::disk('public')->delete($file));
     }
 
-    private static function getUploadDirectory(string $companyName, string $type): string
+    private static function generateUploadDirectory(string $companyName, string $type): string
     {
         $sanitizedCompanyName = Str::of($companyName)->snake()->lower();
         return "applications/{$sanitizedCompanyName}/{$type}";

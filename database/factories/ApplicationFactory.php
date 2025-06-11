@@ -30,6 +30,7 @@ class ApplicationFactory extends Factory
             'job_description' => $this->faker->paragraphs(3, true),
             'salary_range' => '$' . $this->faker->numberBetween(50, 150) . 'k - $' . $this->faker->numberBetween(150, 300) . 'k',
             'location' => $this->faker->randomElement(['Remote', 'New York', 'San Francisco', 'Chicago', 'Austin']),
+            'job_type' => $this->faker->randomElement(['onsite', 'remote', 'hybrid', 'freelance']),
             'application_link' => $this->faker->url(),
             'posted_date' => $this->faker->dateTimeBetween('-90 days', $appliedDate),
             'application_deadline' => $this->faker->dateTimeBetween($appliedDate, '+90 days'),
