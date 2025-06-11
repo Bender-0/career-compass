@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Application extends Model
 {
@@ -39,6 +40,13 @@ class Application extends Model
     {
         return $this->hasMany(Contact::class);
     }
+    /**
+     * @return HasOne<Document,Application>
+     */
+    public function document():HasOne
+    {
+        return $this->hasOne(Document::class);
+    }
 
     protected $fillable = [
         'user_id',
@@ -48,14 +56,11 @@ class Application extends Model
         'applied_date',
         'status',
         'job_description',
+        'job_type',
         'salary_range',
         'location',
         'application_link',
         'posted_date',
         'application_deadline',
-        'resume',
-        'cover_letter',
-        'resume_original_name',
-        'cover_letter_original_name',
     ];
 }
