@@ -14,8 +14,8 @@ class ApplicationImporter extends Importer
     public static function getColumns(): array
     {
         return [
+            ImportColumn::make('id'),
             ImportColumn::make('user_id'),
-            ImportColumn::make('job_title'),
             ImportColumn::make('job_title'),
             ImportColumn::make('company_name'),
             ImportColumn::make('company_website'),
@@ -27,6 +27,8 @@ class ApplicationImporter extends Importer
             ImportColumn::make('application_link'),
             ImportColumn::make('posted_date'),
             ImportColumn::make('application_deadline'),
+            ImportColumn::make('created_at'),
+            ImportColumn::make('updated_at'),
         ];
     }
 
