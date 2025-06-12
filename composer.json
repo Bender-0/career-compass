@@ -18,17 +18,7 @@
         "laravel/tinker": "^2.10.1"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.15",
-        "barryvdh/laravel-ide-helper": "^3.5",
-        "fakerphp/faker": "^1.23",
-        "laravel/pail": "^1.2.2",
-        "laravel/pint": "^1.13",
-        "laravel/sail": "^1.41",
-        "laravel/telescope": "^5.9",
-        "mockery/mockery": "^1.6",
-        "nunomaduro/collision": "^8.6",
-        "pestphp/pest": "^3.8",
-        "pestphp/pest-plugin-laravel": "^3.2"
+        "fakerphp/faker": "^1.23"
     },
     "autoload": {
         "psr-4": {
@@ -47,6 +37,11 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
             "@php artisan filament:upgrade"
+        ],
+        "post-install-cmd": [
+            "@php artisan key:generate",
+            "@php artisan storage:link",
+            "@php artisan migrate --seed"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"

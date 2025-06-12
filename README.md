@@ -111,10 +111,33 @@ Never miss an opportunity, deadline, or follow-up again. CareerCompass provides 
 
 5. **Run migrations, seed the database and link storage**
    ```bash
-   php artisan migrate
-   php artisan db:seed
+   # Run migrations and seed the database with sample data
+   php artisan migrate --seed
+   
+   # Create a symbolic link for file storage
    php artisan storage:link
+   
+   # Clear configuration cache
+   php artisan config:clear
+   php artisan cache:clear
+   
+   # If you want to reset and reseed the database:
+   php artisan migrate:fresh --seed
    ```
+
+## 🎯 Sample Data
+
+The application comes with sample data to help you get started. After running the migrations with the `--seed` flag, you'll have:
+
+- 1 sample user (user@example.com / password)
+- 18 sample job applications
+- Associated contacts, notes, and tasks
+
+To reset and reseed the database at any time, run:
+
+```bash
+php artisan migrate:fresh --seed
+```
 
 6. **Install frontend dependencies**
    ```bash

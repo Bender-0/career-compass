@@ -1,29 +1,82 @@
-*.log
-.DS_Store
-.env
-.env.backup
-.env.production
-.phpactor.json
-.phpunit.result.cache
+# Laravel
+/node_modules
+/public/hot
+/public/storage
+/storage/*.key
+/storage/debugbar
+/storage/pail
 /.fleet
 /.idea
 /.nova
 /.phpunit.cache
 /.vscode
 /.zed
-/auth.json
+/vendor
+.env
+.env.backup
+.env.production
+.phpunit.result.cache
+Homestead.json
+Homestead.yaml
+*.log
+npm-debug.log
+yarn-error.log
+Thumbs.db
+.DS_Store
+
+# Testing
+/coverage
+.phpunit.cache
+.phpunit.result.cache
+
+# Local development
+/.fleet
+/.idea
+/.vscode
+
+# Dependencies
 /node_modules
+/.yarn
+/.pnp
+.pnp.*
+
+# Build files
 /public/build
 /public/hot
 /public/storage
-/storage/*.key
-/storage/pail
-/storage/debugbar
-/vendor
+
+# Environment files
+.env
+.env.*.local
+!.env.example
+
+# Logs
+*.log
+
+# Cache and session files
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*
+
+# Debug
+.phpunit.result.cache
+.phpunit.cache
+
+# Local development
 Homestead.json
 Homestead.yaml
-npm-debug.log
+
+# IDE specific files
+.idea
+.vscode
+*.sublime-workspace
+*.sublime-project
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
-yarn-error.log
-cspell.json
-ROADMAP.md
