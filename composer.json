@@ -1,10 +1,16 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "bender-0/career-compass",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "A comprehensive job application tracking system built with Laravel and Filament",
+    "keywords": ["laravel", "job-tracker", "career", "application", "filament"],
+    "homepage": "https://github.com/Bender-0/career-compass",
     "license": "MIT",
+    "version": "1.0.0",
+    "support": {
+        "issues": "https://github.com/Bender-0/career-compass/issues",
+        "source": "https://github.com/Bender-0/career-compass"
+    },
     "require": {
         "php": "^8.2",
         "filament/filament": "^3.3",

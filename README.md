@@ -84,8 +84,8 @@ Never miss an opportunity, deadline, or follow-up again. CareerCompass provides 
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/Bender-0/laravel-job-tracker.git
-   cd laravel-job-tracker
+   git clone https://github.com/Bender-0/career-compass.git
+   cd career-compass
    ```
 
 2. **Install PHP dependencies**
@@ -104,7 +104,7 @@ Never miss an opportunity, deadline, or follow-up again. CareerCompass provides 
    DB_CONNECTION=mysql
    DB_HOST=127.0.0.1
    DB_PORT=3306
-   DB_DATABASE=job_tracker
+   DB_DATABASE=career_compass
    DB_USERNAME=root
    DB_PASSWORD=
    ```
