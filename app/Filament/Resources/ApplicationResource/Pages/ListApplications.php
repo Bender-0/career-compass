@@ -78,17 +78,14 @@ class ListApplications extends ListRecords
     private function createJobTitleColumn(): TextColumn
     {
         return TextColumn::make('job_title')
-            ->tooltip(function (Application $record): string {
-                if (Str::length($record->job_title) > 30) {
-                    return "Job Title: {$record->job_title}";
-                }
-
-                return 'Job Title';
-            })
+            ->tooltip(fn (Application $record): string => Str::length($record->job_title) > 25
+                ? "Job Title: {$record->job_title}"
+                : 'Job Title'
+            )
             ->searchable()
             ->weight('bold')
             ->size('lg')
-            ->limit(30)
+            ->limit(25)
             ->extraAttributes(['class' => 'items-center justify-center']);
     }
 
@@ -97,7 +94,7 @@ class ListApplications extends ListRecords
         return TextColumn::make('company_name')
             ->tooltip('Company Name')
             ->searchable()
-            ->limit(30)
+            ->limit(25)
             ->extraAttributes(['class' => 'items-center justify-center']);
     }
 
@@ -120,7 +117,11 @@ class ListApplications extends ListRecords
                 ->sortable()
                 ->icon('heroicon-o-calendar'),
             TextColumn::make('location')
-                ->tooltip('Location')
+                ->tooltip(fn (Application $record): string => Str::length($record->location) > 13
+                    ? "Location: {$record->location}"
+                    : 'Location'
+                )
+                ->limit(13)
                 ->icon('heroicon-o-map-pin')
                 ->searchable(),
             $this->createDocumentColumn('resume', 'resume', 'Resume'),
@@ -131,7 +132,11 @@ class ListApplications extends ListRecords
     {
         return Stack::make([
             TextColumn::make('salary_range')
-                ->tooltip('Salary Range')
+                ->tooltip(fn (Application $record): string => Str::length($record->salary_range) > 13
+                    ? "Salary Range: {$record->salary_range}"
+                    : 'Salary Range'
+                )
+                ->limit(13)
                 ->icon('heroicon-o-currency-dollar'),
             TextColumn::make('job_type')
                 ->tooltip('Job Type')

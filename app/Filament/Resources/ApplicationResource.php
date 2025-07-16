@@ -289,9 +289,9 @@ class ApplicationResource extends Resource
     private static function sanitizeInput(string $input): string
     {
         return Str::of($input)
-            ->replace([',', '.', '&', '/', '\\', ':', '*', '?', '"', '<', '>', '|', '-', "'"], '')
-            ->snake()
-            ->upper();
+            ->snake() 
+            ->replace([',', '.', '&', '/', '\\', ':', '*', '?', '"', '<', '>', '|', '-', "'"], '') 
+            ->upper(); 
     }
 
 
